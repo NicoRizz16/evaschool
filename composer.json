@@ -15,20 +15,31 @@
     },
     "require": {
         "php": ">=5.5.9",
+        "doctrine/annotations": "1.4.*",
         "doctrine/doctrine-bundle": "^1.6",
-        "doctrine/orm": "^2.5",
+        "doctrine/doctrine-migrations-bundle": "^1.3",
+        "doctrine/orm": "2.5.6",
+        "friendsofsymfony/user-bundle": "~2.0@dev",
         "incenteev/composer-parameter-handler": "^2.0",
+        "leafo/scssphp": "~0.6",
+        "patchwork/jsqueeze": "2.0.5",
         "sensio/distribution-bundle": "^5.0.19",
         "sensio/framework-extra-bundle": "^5.0.0",
+        "symfony/assetic-bundle": "^2.8.1",
         "symfony/monolog-bundle": "^3.1.0",
         "symfony/polyfill-apcu": "^1.0",
         "symfony/swiftmailer-bundle": "^2.6.4",
         "symfony/symfony": "3.4.*",
-        "twig/twig": "^1.0||^2.0"
+        "symfony/templating": "^3.4",
+        "twig/twig": "^1.0||^2.0",
+        "vich/uploader-bundle": "1.4.0"
     },
     "require-dev": {
         "sensio/generator-bundle": "^3.0",
-        "symfony/phpunit-bridge": "^3.0"
+        "symfony/phpunit-bridge": "^3.0",
+        "doctrine/doctrine-fixtures-bundle": "^2.2",
+        "nelmio/alice": "^2.3",
+        "coresphere/console-bundle": "^0.5.0"
     },
     "scripts": {
         "symfony-scripts": [

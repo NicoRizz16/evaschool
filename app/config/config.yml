@@ -30,6 +30,8 @@ framework:
     assets: ~
     php_errors:
         log: true
+    templating:
+        engines: ['twig']
 
 # Twig Configuration
 twig:
@@ -69,3 +71,43 @@ swiftmailer:
 sensio_framework_extra:
    router:
         annotations: false
+
+# fos_user Configuration
+fos_user:
+    db_driver: orm # other valid values are 'mongodb' and 'couchdb'
+    firewall_name: main
+    user_class: AppBundle\Entity\User
+    from_email:
+        address: "%mailer_user%"
+        sender_name: "%mailer_user%"
+
+# assetic Configuration
+assetic:
+    debug:          "%kernel.debug%"
+    use_controller: "%kernel.debug%"
+    filters:
+        cssrewrite: ~
+        jsqueeze: ~
+        scssphp:
+            formatter: 'Leafo\ScssPhp\Formatter\Compressed'
+    bundles:
+      - FrameworkBundle
+      - TwigBundle
+      - MonologBundle
+      - SwiftmailerBundle
+      - AsseticBundle
+      - FOSUserBundle
+
+
+# VichUploader Configuration
+vich_uploader:
+    db_driver: orm
+
+    mappings:
+        uploaded_ressources:
+            uri_prefix: uploads/ressources
+            upload_destination: '%kernel.root_dir%/../web/uploads/ressources'
+            inject_on_load:     true
+            delete_on_update:   true
+            delete_on_remove:   true
+            namer: vich_uploader.namer_uniqid
