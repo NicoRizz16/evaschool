@@ -54,14 +54,17 @@
                             <a class="nav-link waves-effect" href="{{ path('admin_files_index') }}">Fichiers</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link waves-effect" href="#">Blog</a>
+                            <a class="nav-link waves-effect" href="{{ path('admin_blog_index') }}">Blog</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link waves-effect" href="#">Options</a>
                         </li>
                     </ul>
 
                     <!-- Right -->
                     <ul class="navbar-nav nav-flex-icons">
                         <li class="nav-item">
-                            <a href="#" class="nav-link waves-effect">
+                            <a href="{{ path('fos_user_security_logout') }}" class="nav-link waves-effect">
                                 <i class="fa fa-sign-out"></i>
                             </a>
                         </li>
@@ -94,7 +97,7 @@
 
         <!--Call to action-->
         <div class="pt-2 pb-3">
-            <a class="btn btn-sm btn-outline-white" href="#" target="_blank" role="button">Retour au site
+            <a class="btn btn-sm btn-outline-white" href="{{ path('fos_user_security_logout') }}" target="_blank" role="button">Retour au site
                 <i class="fa fa-sign-out ml-2"></i>
             </a>
         </div>

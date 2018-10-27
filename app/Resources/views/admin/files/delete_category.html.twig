@@ -1,0 +1,30 @@
+{% extends 'admin/base.html.twig' %}
+
+{% block body %}
+
+    <div class="jumbotron">
+        <h4 class="main-title text-center"> Supprimer la catégorie "{{ category.name }}" </h4>
+        <hr class="my-2">
+
+        <div class="col-md-6 offset-md-3 mb-5 pt-5 pb-5">
+
+            <p class="text-center">
+                Êtes-vous sûr de vouloir supprimer cette catégorie ? <br>
+                Toutes les sous catégories ainsi que les fichiers associés seront perdus définitivement !
+            </p>
+
+
+            {{ form_start(form) }}
+            {{ form_widget(form) }}
+            <br>
+            <div class="text-center">
+                <button type="submit" class="btn btn-danger btn-rounded btn-md" formnovalidate>Supprimer <i class="fa fa-trash"></i></button>
+                <a href="{{ path('admin_files_list_by_section_category', {'section': section, 'category_id': parent_category_id}) }}" class="btn btn-outline-danger btn-rounded waves-effect btn-sm">Annuler <i class="fa fa-times ml-1"></i></a>
+            </div>
+
+            {{ form_end(form) }}
+
+        </div>
+    </div>
+
+{% endblock %}

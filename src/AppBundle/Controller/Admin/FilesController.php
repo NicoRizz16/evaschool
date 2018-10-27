@@ -126,5 +126,78 @@ class FilesController extends Controller
         ));
     }
 
+    /**
+     * @Route("/categorie/modifier/{category_id}/{section}/{parent_category_id}", name="admin_files_category_edit", requirements={"section": "\d+", "category_id": "\d+"}, defaults={"section": 1, "parent_category_id": null})
+     */
+    public function editCategory(Request $request, $category_id, $section, $parent_category_id = null)
+    {
+        if(!($section == Category::CRPE_SECTION || $section == Category::ECOLE_SECTION)){
+            throw $this->createNotFoundException('Cette section n\'existe pas.');
+        }
+
+        $category = $this->getDoctrine()->getManager()->getRepository('AppBundle:Category')->find($category_id);
+        if(!isset($category)){
+            throw $this->createNotFoundException('Cette catégorie n\'existe pas.');
+        }
+
+        $form = $this->createForm(CategoryType::class, $category);
+        $form->handleRequest($request);
+
+        if($form->isSubmitted() && $form->isValid()){
+            $em = $this->getDoctrine()->getManager();
+            $em->persist($category);
+            $em->flush();
+
+            $this->addFlash('success', 'La modification de la catégorie a bien été enregistrée !');
+
+            return $this->redirectToRoute('admin_files_list_by_section_category', array('section' => $section, 'category_id' => $parent_category_id));
+        }
+
+        return $this->render('admin/files/edit_category.html.twig', array(
+            'section' => $section,
+            'parent_category_id' => $parent_category_id,
+            'sectionCRPE' => Category::CRPE_SECTION,
+            'sectionEcole' => Category::ECOLE_SECTION,
+            'form' => $form->createView(),
+            'category' => $category
+        ));
+    }
+
+    /**
+     * @Route("/categorie/supprimer/{category_id}/{section}/{parent_category_id}", name="admin_files_category_delete", requirements={"section": "\d+", "category_id": "\d+"}, defaults={"section": 1, "parent_category_id": null})
+     */
+    public function deleteCategoryAction(Request $request, $category_id, $section, $parent_category_id = null)
+    {
+        if(!($section == Category::CRPE_SECTION || $section == Category::ECOLE_SECTION)){
+            throw $this->createNotFoundException('Cette section n\'existe pas.');
+        }
+
+        $category = $this->getDoctrine()->getManager()->getRepository('AppBundle:Category')->find($category_id);
+        if(!isset($category)){
+            throw $this->createNotFoundException('Cette catégorie n\'existe pas.');
+        }
+
+        $form = $this->get('form.factory')->create();
+
+        $form->handleRequest($request);
+        if ($form->isSubmitted() && $form->isValid()) {
+            $em = $this->getDoctrine()->getManager();
+
+            $em->remove($category);
+            $em->flush();
+
+            $this->addFlash('success', 'La catégorie "'.$category->getName().'" a bien été supprimée.');
+            return $this->redirectToRoute('admin_files_list_by_section_category', array('section' => $section, 'category_id' => $parent_category_id));
+        }
+
+        return $this->render('admin/files/delete_category.html.twig', array(
+            'section' => $section,
+            'parent_category_id' => $parent_category_id,
+            'sectionCRPE' => Category::CRPE_SECTION,
+            'sectionEcole' => Category::ECOLE_SECTION,
+            'form' => $form->createView(),
+            'category' => $category
+        ));
+    }
 
 }

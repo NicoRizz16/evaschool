@@ -35,7 +35,11 @@
 
                     <!--Card content-->
                     <div class="card-body text-center white-text">
-                        <h6>{{ categoryItem.name }}</h6>
+                        <div class="row mx-0 my-0 justify-content-around">
+                            <a href="{{ path('admin_files_category_edit', {'category_id': categoryItem.id,'section': section, 'parent_category_id': category}) }}" style="color: white; padding: 2px;"><i class="fa fa-edit"></i></a>
+                            <a href="{{ path('admin_files_category_delete', {'category_id': categoryItem.id,'section': section, 'parent_category_id': category}) }}" style="color: white; padding: 2px;"><i class="fa fa-trash"></i></a>
+                        </div>
+                        <h4>{{ categoryItem.name }}</h4>
                         <hr class="white white-text">
                         <a href="{{ path('admin_files_list_by_section_category', {'section': section, 'category_id': categoryItem.id}) }}" class="btn btn-outline-white waves-effect btn-md"><i class="fa fa-eye fa-2x"></i></a>
                     </div>

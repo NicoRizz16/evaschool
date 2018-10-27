@@ -1,0 +1,56 @@
+{% extends ":admin:layout_sign_in.html.twig" %}
+
+{% block fos_user_content %}
+
+    <div class="col-md-6 offset-md-3 mt-5">
+        <section class="form-elegant">
+
+            <!--Form without header-->
+            <div class="card">
+
+                <div class="card-body mx-4">
+
+                    <!--Header-->
+                    <div class="text-center">
+                        <h3 class="dark-grey-text mb-5"><strong>Espace Administrateur</strong></h3>
+                    </div>
+
+                    <!--Body-->
+                    <form action="{{ path("fos_user_security_check") }}" method="post">
+                        {% if csrf_token %}
+                            <input type="hidden" name="_csrf_token" value="{{ csrf_token }}" />
+                        {% endif %}
+
+                        <div class="md-form">
+                            <i class="fa fa-user prefix {% if error %}text-danger{% endif %}" aria-hidden="true"></i>
+                            <input type="text" id="username" class="form-control" name="_username" value="{{ last_username }}" required="required" />
+                            <label for="username">Nom d'utilisateur</label>
+                        </div>
+
+                        <div class="md-form pb-3">
+                            <i class="fa fa-lock prefix {% if error %}text-danger{% endif %}"></i>
+                            <input type="password" id="password" class="form-control" name="_password" required="required" />
+                            <label for="password">Mot de passe</label>
+                        </div>
+
+                        <div class="text-center mb-3">
+                            <button type="submit" id="_submit" class="btn blue-gradient btn-block btn-rounded z-depth-1a" name="_submit" formnovalidate>Connexion</button>
+                        </div>
+                    </form>
+
+                </div>
+
+            </div>
+            <!--/Form without header-->
+        </section>
+    </div>
+
+{% endblock fos_user_content %}
+
+
+{% block javascripts %}
+    {{ parent() }}
+    <script>
+
+    </script>
+{% endblock %}

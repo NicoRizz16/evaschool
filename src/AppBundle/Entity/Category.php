@@ -48,7 +48,7 @@ class Category
 
     /**
      * One category has Many childrens.
-     * @ORM\OneToMany(targetEntity="Category", mappedBy="parent")
+     * @ORM\OneToMany(targetEntity="Category", mappedBy="parent", cascade={"remove"})
      */
     private $children;
 
