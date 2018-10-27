@@ -1,12 +1,12 @@
 <?php
 
-namespace AppBundle\Controller;
+namespace AppBundle\Controller\Visitor;
 
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Routing\Annotation\Route;
 
-class DefaultController extends Controller
+class MainController extends Controller
 {
     /**
      * @Route("/", name="homepage")

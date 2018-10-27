@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta http-equiv="x-ua-compatible" content="ie=edge">
+
+    {# ============= TITLE ============= #}
+    <title>{% block title %}Espace admin{% endblock %}</title>
+
+    {# ============= STYLES ============= #}
+    {% block stylesheets %}
+        <!-- Font Awesome -->
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+
+        {% stylesheets filter='cssrewrite, ?scssphp'
+            'css/bootstrap.min.css'
+            'css/mdb.min.css'
+            'css/style.css'
+            output='css/compiled/app.css'%}
+            <link rel="stylesheet" href="{{ asset_url }}?d={{ "now"|date("dmy") }}" type="text/css" />
+        {% endstylesheets %}
+    {% endblock %}
+
+</head>
+
+<body class="grey lighten-3">
+
+<!--Main Navigation-->
+<header>
+    {% block nav %}
+        <!-- Navbar -->
+        <nav class="navbar fixed-top navbar-expand-lg navbar-light white scrolling-navbar">
+            <div class="container-fluid">
+
+                <!-- Brand -->
+                <a class="navbar-brand waves-effect" href="{{ path('admin_dashboard') }}">
+                    <strong class="blue-text">EVASCHOOL</strong>
+                </a>
+
+                <!-- Collapse -->
+                <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent"
+                        aria-expanded="false" aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+
+                <!-- Links -->
+                <div class="collapse navbar-collapse" id="navbarSupportedContent">
+
+                    <!-- Left -->
+                    <ul class="navbar-nav mr-auto">
+                        <li class="nav-item">
+                            <a class="nav-link waves-effect" href="{{ path('admin_files_index') }}">Fichiers</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link waves-effect" href="#">Blog</a>
+                        </li>
+                    </ul>
+
+                    <!-- Right -->
+                    <ul class="navbar-nav nav-flex-icons">
+                        <li class="nav-item">
+                            <a href="#" class="nav-link waves-effect">
+                                <i class="fa fa-sign-out"></i>
+                            </a>
+                        </li>
+                    </ul>
+
+                </div>
+
+            </div>
+        </nav>
+        <!-- Navbar -->
+    {% endblock %}
+
+</header>
+<!--Main Navigation-->
+
+<!--Main layout-->
+<main class="pt-5 mx-lg-5">
+    <div class="container-fluid mt-4">
+
+        {% block body %}
+        {% endblock %}
+
+    </div>
+</main>
+<!--Main layout-->
+
+{% block footer %}
+    <!--Footer-->
+    <footer class="page-footer text-center font-small primary-color-dark darken-2 mt-4 wow fadeIn">
+
+        <!--Call to action-->
+        <div class="pt-2 pb-3">
+            <a class="btn btn-sm btn-outline-white" href="#" target="_blank" role="button">Retour au site
+                <i class="fa fa-sign-out ml-2"></i>
+            </a>
+        </div>
+        <!--/.Call to action-->
+
+        <!--Copyright-->
+        <!--Copyright-->
+        <div class="footer-copyright py-3" style="height: 75px;">
+            © {{ 'now'|date('Y') }} Copyright:
+            <span style="color:white;"> evaschool.fr</span>
+        </div>
+        <!--/.Copyright-->
+        <!--/.Copyright-->
+
+    </footer>
+    <!--/.Footer-->
+{% endblock %}
+
+{# ============= SCRIPTS ============= #}
+{% block javascripts %}
+
+    {% javascripts filter='?jsqueeze'
+        'js/jquery-3.1.1.min.js'
+        'js/popper.min.js'
+        'js/bootstrap.min.js'
+        'js/mdb.min.js'
+        'js/main.js'
+        output='js/compiled/app.js' %}
+    <script type="text/javascript" src="{{ asset_url }}?d={{ "now"|date("dmy") }}"></script>
+    {% endjavascripts %}
+
+    <script type="text/javascript">
+        // Animations initialization
+        new WOW().init();
+    </script>
+
+{% endblock %}
+
+</body>
+
+</html>

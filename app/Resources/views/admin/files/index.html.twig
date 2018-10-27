@@ -1,0 +1,47 @@
+{% extends 'admin/base.html.twig' %}
+
+{% block body %}
+    <br>
+    <div class="jumbotron text-center">
+        <h2>Gestion des fichiers</h2>
+        <hr>
+        <nav aria-label="breadcrumb">
+            <ol class="breadcrumb">
+                <li class="breadcrumb-item active"><a href="{{ path('admin_files_index') }}">Racine</a></li>
+            </ol>
+        </nav>
+        <br>
+        <div class="row">
+            <div class="col-md-3 offset-md-2">
+                <!--Card-->
+                <div class="card">
+
+                    <!--Card content-->
+                    <div class="card-body text-center">
+                        <h4>CRPE</h4>
+                        <hr>
+                        <a href="{{ path('admin_files_list_by_section_category', {'section': sectionCRPE}) }}" class="btn btn-outline-primary waves-effect btn-sm"><i class="fa fa-eye"></i></a>
+                    </div>
+
+                </div>
+                <!--/.Card-->
+            </div>
+            <div class="col-md-3 offset-md-2">
+                <!--Card-->
+                <div class="card">
+
+                    <!--Card content-->
+                    <div class="card-body text-center">
+                        <h4>Ecole</h4>
+                        <hr>
+                        <a href="{{ path('admin_files_list_by_section_category', {'section': sectionEcole}) }}" class="btn btn-outline-primary waves-effect btn-sm"><i class="fa fa-eye"></i></a>
+                    </div>
+
+                </div>
+                <!--/.Card-->
+            </div>
+        </div>
+    </div>
+    <br>
+{% endblock %}
+

@@ -2,6 +2,8 @@
 
 namespace AppBundle\Repository;
 
+use AppBundle\Entity\Category;
+
 /**
  * CategoryRepository
  *
@@ -10,4 +12,19 @@ namespace AppBundle\Repository;
  */
 class CategoryRepository extends \Doctrine\ORM\EntityRepository
 {
+    public function getCategoriesBySectionAndParent($section, Category $parent = null)
+    {
+        $query = $this->createQueryBuilder('c')
+            ->where('c.section = :section')
+            ->setParameter('section', $section);
+
+        if(isset($parent)){
+            $query->andWhere('c.parent = :parent')
+                ->setParameter('parent', $parent->getId());
+        } else {
+            $query->andWhere($query->expr()->isNull('c.parent'));
+        }
+
+        return $query->getQuery()->getResult();
+    }
 }

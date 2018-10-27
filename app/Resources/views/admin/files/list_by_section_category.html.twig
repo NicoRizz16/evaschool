@@ -1,0 +1,65 @@
+{% extends 'admin/base.html.twig' %}
+
+{% block body %}
+    <br>
+    <div class="jumbotron">
+        <h2 class="text-center">Gestion des fichiers</h2>
+        <hr>
+        <nav aria-label="breadcrumb">
+            <ol class="breadcrumb">
+                <li class="breadcrumb-item"><a href="{{ path('admin_files_index') }}">Racine</a></li>
+                {% if section == sectionCRPE %}
+                    <li class="breadcrumb-item {% if categoryTree|length == 0 %} active {% endif %}"><a href="{{ path('admin_files_list_by_section_category', {'section': sectionCRPE}) }}">CRPE</a></li>
+                {% else %}
+                    <li class="breadcrumb-item {% if categoryTree|length == 0 %} active {% endif %}"><a href="{{ path('admin_files_list_by_section_category', {'section': sectionEcole}) }}">Ecole</a></li>
+                {% endif %}
+                {% if categoryTree|length > 0 %}
+                    {% for categoryItem in categoryTree %}
+                        <li class="breadcrumb-item {% if loop.last %}active{% endif %}"><a href="{{ path('admin_files_list_by_section_category', {'section': section, 'category_id': categoryItem.id}) }}">{{ categoryItem.name }}</a></li>
+                    {% endfor %}
+                {% endif %}
+            </ol>
+        </nav>
+
+        <div class="row py-0 flex-row-reverse">
+            <a href="{{ path('admin_files_category_add', {'section': section, 'parent_category_id': category}) }}" class="btn btn-primary btn-sm my-0"> <i class="fa fa-plus"></i> Ajouter catégorie</a>
+        </div>
+        <hr>
+        <div class="row">
+        {% for categoryItem in categoriesList %}
+            <!--Grid column-->
+            <div class="col-md-4 mb-2">
+
+                <!--Card-->
+                <div class="card" style="background-color: {{ categoryItem.color }}">
+
+                    <!--Card content-->
+                    <div class="card-body text-center white-text">
+                        <h6>{{ categoryItem.name }}</h6>
+                        <hr class="white white-text">
+                        <a href="{{ path('admin_files_list_by_section_category', {'section': section, 'category_id': categoryItem.id}) }}" class="btn btn-outline-white waves-effect btn-md"><i class="fa fa-eye fa-2x"></i></a>
+                    </div>
+
+                </div>
+                <!--/.Card-->
+
+            </div>
+            <!--Grid column-->
+        {% endfor %}
+        </div>
+
+    </div>
+    <br>
+{% endblock %}
+
+{% block javascripts %}
+    {{ parent() }}
+    <script>
+        $(function(){
+            {% for message in app.session.flashbag.get('success') %}
+            toastr.success('{{ message }}');
+            {% endfor %}
+        });
+    </script>
+{% endblock %}
+
