@@ -30,3 +30,15 @@
     font-family: "jtmw", Helvetica, Arial, sans-serif;
     font-size: 1.7em;
 }
+
+#visitorBody{
+    font-family: "jtmw", Helvetica, Arial, sans-serif;
+}
+
+#visitorBody h3, #visitorBody h4, #footerDiv, #visitorBody p{
+    color: #747373;
+}
+
+#visitorBody p {
+    font-size: 1.2em;
+}

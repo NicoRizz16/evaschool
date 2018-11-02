@@ -1,6 +1,51 @@
 {% extends 'visitor/base.html.twig' %}
 
 {% block body %}
-  
+  <p class="text-center">Vous trouverez ici de nombreuses ressources mises à la disposition des professeurs des écoles, des PES ainsi que des étudiants préparant le CRPE.</p>
+    <br>
+
+  <div class="row mx-3 mb-5 mt-2">
+    <!--First columnn-->
+    <div class="col-sm-3 offset-sm-2 mb-2">
+      <!--Card-->
+      <div class="card pb-2 landing_page_card" style="background-color: #c4a78f;">
+
+        <!--Card content-->
+        <div class="card-block text-center">
+          <!--Title-->
+          <h4 class="card-title pt-3 white-text">CRPE</h4>
+          <hr class="white">
+          <!--Text-->
+            {#<p class="card-text white-text">blab lalf dksfk gkfdsg f…</p>#}
+          <a href="{{ path('ressources_index') }}" class="btn btn-outline-white waves-effect btn-md"><i class="fa fa-eye fa-2x"></i></a>
+        </div>
+        <!--/.Card content-->
+
+      </div>
+      <!--/.Card-->
+    </div>
+    <!--First columnn-->
+    <!--Second columnn-->
+    <div class="col-sm-3 offset-sm-2 mb-2">
+      <!--Card-->
+      <div class="card pb-2 landing_page_card" style="background-color: #c4a78f;">
+
+        <!--Card content-->
+        <div class="card-block text-center">
+          <!--Title-->
+          <h4 class="card-title pt-3 white-text">Ecole</h4>
+          <hr class="white">
+          <!--Text-->
+            {#<p class="card-text white-text">blab lalf dksfk gkfdsg f…</p>#}
+          <a href="{{ path('blog_index') }}" class="btn btn-outline-white waves-effect btn-md"><i class="fa fa-eye fa-2x"></i></a>
+        </div>
+        <!--/.Card content-->
+
+      </div>
+      <!--/.Card-->
+    </div>
+    <!--Second columnn-->
+  </div>
+    <br><br>
 {% endblock %}
 

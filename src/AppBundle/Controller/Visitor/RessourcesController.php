@@ -2,6 +2,7 @@
 
 namespace AppBundle\Controller\Visitor;
 
+use AppBundle\Entity\Category;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Routing\Annotation\Route;
@@ -13,6 +14,12 @@ class RessourcesController extends Controller
      */
     public function indexAction(Request $request)
     {
-        return $this->render('visitor/ressources/index.html.twig');
+        $sectionCRPE = Category::CRPE_SECTION;
+        $sectionEcole = Category::ECOLE_SECTION;
+
+        return $this->render('visitor/ressources/index.html.twig', array(
+            'sectionCRPE' => $sectionCRPE,
+            'sectionEcole' => $sectionEcole
+        ));
     }
 }

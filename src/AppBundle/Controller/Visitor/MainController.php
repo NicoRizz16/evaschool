@@ -15,4 +15,12 @@ class MainController extends Controller
     {
         return $this->render('visitor/landing_page.html.twig');
     }
+
+    /**
+     * @Route("/actualites", name="blog_index")
+     */
+    public function blogIndexAction(Request $request)
+    {
+        return $this->render('visitor/blog/index.html.twig');
+    }
 }

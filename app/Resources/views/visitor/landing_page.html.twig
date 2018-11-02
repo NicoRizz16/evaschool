@@ -26,7 +26,7 @@
 
 </head>
 
-<body>
+<body id="visitorBody">
 
 <!--Main Navigation-->
 <header>
@@ -54,7 +54,7 @@
                     <!--Card content-->
                     <div class="card-block text-center">
                         <!--Title-->
-                        <h4 class="card-title pt-3">Ressources</h4>
+                        <h4 class="card-title pt-3 white-text">Ressources</h4>
                         <hr class="white">
                         <!--Text-->
                         {#<p class="card-text white-text">blab lalf dksfk gkfdsg f…</p>#}
@@ -74,11 +74,11 @@
                     <!--Card content-->
                     <div class="card-block text-center">
                         <!--Title-->
-                        <h4 class="card-title pt-3">Actualités</h4>
+                        <h4 class="card-title pt-3 white-text">Actualités</h4>
                         <hr class="white">
                         <!--Text-->
                         {#<p class="card-text white-text">blab lalf dksfk gkfdsg f…</p>#}
-                        <a href="#" class="btn btn-outline-white waves-effect btn-md"><i class="fa fa-eye fa-2x"></i></a>
+                        <a href="{{ path('blog_index') }}" class="btn btn-outline-white waves-effect btn-md"><i class="fa fa-eye fa-2x"></i></a>
                     </div>
                     <!--/.Card content-->
 
@@ -94,7 +94,7 @@
 <br>
 
 {% block footer %}
-    <div class="text-center">
+    <div class="text-center" id="footerDiv">
         © {{ 'now'|date('Y') }} Copyright : evaschool.fr
     </div>
 {% endblock %}

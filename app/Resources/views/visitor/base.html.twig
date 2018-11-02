@@ -26,7 +26,7 @@
 
 </head>
 
-<body>
+<body id="visitorBody">
 
 <!--Main Navigation-->
 <header>
@@ -48,7 +48,7 @@
                         <a class="nav-link" href="{{ path('ressources_index') }}">Ressources</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="#">Actualités</a>
+                        <a class="nav-link" href="{{ path('blog_index') }}">Actualités</a>
                     </li>
                 </ul>
                 <span class="navbar-text white-text">
@@ -76,7 +76,7 @@
 <!--Main layout-->
 
 {% block footer %}
-    <div class="text-center">
+    <div class="text-center" id="footerDiv">
         © {{ 'now'|date('Y') }} Copyright : evaschool.fr
     </div>
 {% endblock %}
