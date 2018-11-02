@@ -1,0 +1,82 @@
+{% extends 'visitor/base.html.twig' %}
+
+{% block body %}
+    <nav aria-label="breadcrumb" style="font-size: 1.5em;">
+        <ol class="breadcrumb">
+            <li class="breadcrumb-item"><a href="{{ path('ressources_index') }}">Ressources</a></li>
+            {% if section == sectionCRPE %}
+                <li class="breadcrumb-item {% if categoryTree|length == 0 %} active {% endif %}"><a href="{{ path('ressources_list', {'section': sectionCRPE}) }}">CRPE</a></li>
+            {% else %}
+                <li class="breadcrumb-item {% if categoryTree|length == 0 %} active {% endif %}"><a href="{{ path('ressources_list', {'section': sectionEcole}) }}">Ecole</a></li>
+            {% endif %}
+            {% if categoryTree|length > 0 %}
+                {% for categoryItem in categoryTree %}
+                    <li class="breadcrumb-item {% if loop.last %}active{% endif %}"><a href="{{ path('ressources_list', {'section': section, 'category_id': categoryItem.id}) }}">{{ categoryItem.name }}</a></li>
+                {% endfor %}
+            {% endif %}
+        </ol>
+    </nav>
+
+    <div class="jumbotron">
+
+        {% if parent is not null %}
+            <h5>Fichiers</h5>
+            <hr>
+
+            <div class="row">
+                {% for fileItem in parent.filesUploaded %}
+                    <div class="col-sm-3">
+
+                        <!-- Card -->
+                        <div class="card card-personal text-center">
+
+                            <!-- Card content -->
+                            <div class="card-body">
+                                <!-- Text -->
+                                <p class="card-text"><strong>{{ fileItem.description }}</strong></p>
+                                <hr>
+                                <p class="card-meta" style="font-size: 0.8em;">Ajouté le {{ fileItem.updatedAt|localizeddate('none', 'none', app.request.locale, "Europe/Paris", "cccc d MMMM Y") }}</p>
+                                <div class="text-center">
+                                    <a href="{{ absolute_url(asset(vich_uploader_asset(fileItem, 'fileUploadedFile'))) }}" download="Télécharger" class="card-meta"><span><i class="fa fa-download fa-2x"></i></span></a>
+                                </div>
+                            </div>
+                            <!-- Card content -->
+
+                        </div>
+                        <!-- Card -->
+
+                    </div>
+                {% endfor %}
+            </div>
+            <br><br>
+        {% endif %}
+
+        {% if categoriesList|length > 0 %}
+            <h5>Accéder aux sous-catégories</h5>
+            <hr>
+            <div class="row">
+                {% for categoryItem in categoriesList %}
+                    <!--Grid column-->
+                    <div class="col-md-4 mb-2">
+
+                        <!--Card-->
+                        <div class="card" style="background-color: {{ categoryItem.color }}">
+
+                            <!--Card content-->
+                            <div class="card-body text-center white-text">
+                                <h4 class="white-text">{{ categoryItem.name }}</h4>
+                                <hr class="white white-text">
+                                <a href="{{ path('ressources_list', {'section': section, 'category_id': categoryItem.id}) }}" class="btn btn-outline-white waves-effect btn-md"><i class="fa fa-eye fa-2x"></i></a>
+                            </div>
+
+                        </div>
+                        <!--/.Card-->
+
+                    </div>
+                    <!--Grid column-->
+                {% endfor %}
+            </div>
+        {% endif %}
+    </div>
+    <br>
+{% endblock %}

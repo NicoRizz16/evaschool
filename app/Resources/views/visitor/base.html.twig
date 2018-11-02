@@ -31,7 +31,9 @@
 <!--Main Navigation-->
 <header>
     <div class="text-center mt-3 mb-4">
-        <img src="{{ absolute_url(asset('img/logo_complet2.png')) }}" alt="Logo" class="img-fluid" style="width: 50%;">
+        <a href="{{ path('homepage') }}">
+            <img src="{{ absolute_url(asset('img/logo_complet2.png')) }}" alt="Logo" class="img-fluid" style="width: 50%;">
+        </a>
     </div>
     {% block nav %}
         {# ===========================================================
@@ -65,7 +67,7 @@
 <!--Main Navigation-->
 
 <!--Main layout-->
-<main class="pt-5 mx-lg-5">
+<main class="pt-2 mx-lg-5">
     <div class="container-fluid mt-4">
 
         {% block body %}

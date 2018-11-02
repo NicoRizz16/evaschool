@@ -1,7 +1,7 @@
 {% extends 'visitor/base.html.twig' %}
 
 {% block body %}
-  <p class="text-center">Vous trouverez ici de nombreuses ressources mises à la disposition des professeurs des écoles, des PES ainsi que des étudiants préparant le CRPE.</p>
+  <p class="text-center pt-4">Vous trouverez ici de nombreuses ressources mises à la disposition des professeurs des écoles, des PES ainsi que des étudiants préparant le CRPE.</p>
     <br>
 
   <div class="row mx-3 mb-5 mt-2">
@@ -17,7 +17,7 @@
           <hr class="white">
           <!--Text-->
             {#<p class="card-text white-text">blab lalf dksfk gkfdsg f…</p>#}
-          <a href="{{ path('ressources_index') }}" class="btn btn-outline-white waves-effect btn-md"><i class="fa fa-eye fa-2x"></i></a>
+          <a href="{{ path('ressources_list', {'section': sectionCRPE}) }}" class="btn btn-outline-white waves-effect btn-md"><i class="fa fa-eye fa-2x"></i></a>
         </div>
         <!--/.Card content-->
 
@@ -37,7 +37,7 @@
           <hr class="white">
           <!--Text-->
             {#<p class="card-text white-text">blab lalf dksfk gkfdsg f…</p>#}
-          <a href="{{ path('blog_index') }}" class="btn btn-outline-white waves-effect btn-md"><i class="fa fa-eye fa-2x"></i></a>
+          <a href="{{ path('ressources_list', {'section': sectionEcole}) }}" class="btn btn-outline-white waves-effect btn-md"><i class="fa fa-eye fa-2x"></i></a>
         </div>
         <!--/.Card content-->
 
