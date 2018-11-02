@@ -1,0 +1,32 @@
+/* FONTS */
+@font-face {
+    font-family: "jtmw";
+    font-style: normal;
+    src: url('font/jtmw.otf') format('truetype');
+}
+
+@font-face {
+    font-family: "jtmw";
+    font-style: italic;
+    src: url('font/jtmw_italic.otf') format('truetype');
+}
+
+
+
+.landing_page_card{
+    color: white;
+    font-family: "jtmw", Helvetica, Arial, sans-serif;
+}
+
+.landing_page_card h4{
+    font-family: "jtmw", Helvetica, Arial, sans-serif;
+}
+
+.landing_page_card a {
+    color: white;
+}
+
+#navbarText a{
+    font-family: "jtmw", Helvetica, Arial, sans-serif;
+    font-size: 1.7em;
+}

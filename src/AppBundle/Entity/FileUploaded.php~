@@ -61,6 +61,13 @@ class FileUploaded
     private $category;
 
     /**
+     * @var string
+     *
+     * @ORM\Column(name="description", type="text")
+     */
+    private $description;
+
+    /**
      * Get id
      *
      * @return int
@@ -166,5 +173,42 @@ class FileUploaded
     {
         return $this->getCategory();
     }
-}
 
+    /**
+     * Set fileUploadedName
+     *
+     * @param string $fileUploadedName
+     *
+     * @return FileUploaded
+     */
+    public function setFileUploadedName($fileUploadedName)
+    {
+        $this->fileUploadedName = $fileUploadedName;
+
+        return $this;
+    }
+
+    /**
+     * Set updatedAt
+     *
+     * @param \DateTime $updatedAt
+     *
+     * @return FileUploaded
+     */
+    public function setUpdatedAt($updatedAt)
+    {
+        $this->updatedAt = $updatedAt;
+
+        return $this;
+    }
+
+    /**
+     * Get updatedAt
+     *
+     * @return \DateTime
+     */
+    public function getUpdatedAt()
+    {
+        return $this->updatedAt;
+    }
+}

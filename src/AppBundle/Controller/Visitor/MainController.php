@@ -6,13 +6,13 @@ use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Routing\Annotation\Route;
 
-class RessourcesController extends Controller
+class MainController extends Controller
 {
     /**
-     * @Route("/ressources", name="ressources_index")
+     * @Route("/", name="homepage")
      */
     public function indexAction(Request $request)
     {
-        return $this->render('visitor/ressources/index.html.twig');
+        return $this->render('visitor/landing_page.html.twig');
     }
 }

@@ -5,6 +5,7 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <meta http-equiv="x-ua-compatible" content="ie=edge">
+    <link rel="icon" type="image/png" href="{{ absolute_url(asset('img/logo.png')) }}">
 
     {# ============= TITLE ============= #}
     <title>{% block title %}Evaschool{% endblock %}</title>
@@ -29,7 +30,34 @@
 
 <!--Main Navigation-->
 <header>
+    <div class="text-center mt-3 mb-4">
+        <img src="{{ absolute_url(asset('img/logo_complet2.png')) }}" alt="Logo" class="img-fluid" style="width: 50%;">
+    </div>
     {% block nav %}
+        {# ===========================================================
+===========================  MENU ==========================
+============================================================ #}
+        <nav class="navbar navbar-expand-lg navbar-dark" style="background-color: #b7d0fa;">
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarText" aria-controls="navbarText"
+                    aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarText">
+                <ul class="navbar-nav mr-auto">
+                    <li class="nav-item">
+                        <a class="nav-link" href="{{ path('ressources_index') }}">Ressources</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#">Actualités</a>
+                    </li>
+                </ul>
+                <span class="navbar-text white-text">
+                  <a href="mailto:contact@evaschool.fr" class="nav-link border border-light rounded" target="_blank" style="color: white; border: 1px solid white; font-size: 1em;">
+                      <i class="fa fa-envelope mr-2"></i>Me contacter
+                </a>
+                </span>
+            </div>
+        </nav>
 
     {% endblock %}
 
@@ -58,6 +86,7 @@
 
     {% javascripts filter='?jsqueeze'
         'js/jquery-3.1.1.min.js'
+        'js/tether.min.js'
         'js/popper.min.js'
         'js/bootstrap.min.js'
         'js/mdb.min.js'

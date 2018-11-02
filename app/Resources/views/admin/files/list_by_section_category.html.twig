@@ -2,7 +2,7 @@
 
 {% block body %}
     <br>
-    <div class="jumbotron">
+    <div class="jumbotron pb-1 pt-3 mb-3 mt-0">
         <h2 class="text-center">Gestion des fichiers</h2>
         <hr>
         <nav aria-label="breadcrumb">
@@ -20,38 +20,85 @@
                 {% endif %}
             </ol>
         </nav>
+    </div>
 
+    <div class="jumbotron">
+
+        {% if parent is not null %}
+            <h5>Fichiers</h5>
+            <hr>
+
+            {% if category is not null %}
+                <div class="row py-0 flex-row-reverse">
+                    <a href="{{ path('admin_files_category_file_add', {'category_id': category}) }}" class="btn btn-info btn-sm my-0"> <i class="fa fa-plus"></i> Ajouter un fichier</a>
+                </div>
+            {% endif %}
+
+            <div class="row">
+                {% for fileItem in parent.filesUploaded %}
+                    <div class="col-sm-3">
+
+                        <!-- Card -->
+                        <div class="card card-personal text-center">
+
+                            <!-- Card content -->
+                            <div class="card-body">
+                                <div class="row mx-0 mb-3 justify-content-around">
+                                    <a href="#" ><i class="fa fa-edit"></i></a>
+                                    <a href="{{ path('admin_files_file_delete', {'file_id': fileItem.id, 'category_id': category}) }}" ><i class="fa fa-trash"></i></a>
+                                </div>
+                                <!-- Text -->
+                                <p class="card-text"><strong>{{ fileItem.description }}</strong></p>
+                                <hr>
+                                <p class="card-meta">Ajouté le {{ fileItem.updatedAt|localizeddate('none', 'none', app.request.locale, "Europe/Paris", "cccc d MMMM Y") }}</p>
+                                <div class="text-center">
+                                    <a href="{{ absolute_url(asset(vich_uploader_asset(fileItem, 'fileUploadedFile'))) }}" download="Télécharger" class="card-meta"><span><i class="fa fa-download fa-2x"></i></span></a>
+                                </div>
+                            </div>
+                            <!-- Card content -->
+
+                        </div>
+                        <!-- Card -->
+
+                    </div>
+                {% endfor %}
+            </div>
+            <br><br>
+        {% endif %}
+
+        <h5>Sous-catégories</h5>
+        <hr>
         <div class="row py-0 flex-row-reverse">
             <a href="{{ path('admin_files_category_add', {'section': section, 'parent_category_id': category}) }}" class="btn btn-primary btn-sm my-0"> <i class="fa fa-plus"></i> Ajouter catégorie</a>
         </div>
-        <hr>
-        <div class="row">
-        {% for categoryItem in categoriesList %}
-            <!--Grid column-->
-            <div class="col-md-4 mb-2">
+        {% if categoriesList|length > 0 %}
+            <div class="row">
+                {% for categoryItem in categoriesList %}
+                    <!--Grid column-->
+                    <div class="col-md-4 mb-2">
 
-                <!--Card-->
-                <div class="card" style="background-color: {{ categoryItem.color }}">
+                        <!--Card-->
+                        <div class="card" style="background-color: {{ categoryItem.color }}">
 
-                    <!--Card content-->
-                    <div class="card-body text-center white-text">
-                        <div class="row mx-0 my-0 justify-content-around">
-                            <a href="{{ path('admin_files_category_edit', {'category_id': categoryItem.id,'section': section, 'parent_category_id': category}) }}" style="color: white; padding: 2px;"><i class="fa fa-edit"></i></a>
-                            <a href="{{ path('admin_files_category_delete', {'category_id': categoryItem.id,'section': section, 'parent_category_id': category}) }}" style="color: white; padding: 2px;"><i class="fa fa-trash"></i></a>
+                            <!--Card content-->
+                            <div class="card-body text-center white-text">
+                                <div class="row mx-0 my-0 justify-content-around">
+                                    <a href="{{ path('admin_files_category_edit', {'category_id': categoryItem.id,'section': section, 'parent_category_id': category}) }}" style="color: white; padding: 2px;"><i class="fa fa-edit"></i></a>
+                                    <a href="{{ path('admin_files_category_delete', {'category_id': categoryItem.id,'section': section, 'parent_category_id': category}) }}" style="color: white; padding: 2px;"><i class="fa fa-trash"></i></a>
+                                </div>
+                                <h4>{{ categoryItem.name }}</h4>
+                                <hr class="white white-text">
+                                <a href="{{ path('admin_files_list_by_section_category', {'section': section, 'category_id': categoryItem.id}) }}" class="btn btn-outline-white waves-effect btn-md"><i class="fa fa-eye fa-2x"></i></a>
+                            </div>
+
                         </div>
-                        <h4>{{ categoryItem.name }}</h4>
-                        <hr class="white white-text">
-                        <a href="{{ path('admin_files_list_by_section_category', {'section': section, 'category_id': categoryItem.id}) }}" class="btn btn-outline-white waves-effect btn-md"><i class="fa fa-eye fa-2x"></i></a>
+                        <!--/.Card-->
+
                     </div>
-
-                </div>
-                <!--/.Card-->
-
+                    <!--Grid column-->
+                {% endfor %}
             </div>
-            <!--Grid column-->
-        {% endfor %}
-        </div>
-
+        {% endif %}
     </div>
     <br>
 {% endblock %}

@@ -3,7 +3,9 @@
 namespace AppBundle\Controller\Admin;
 
 use AppBundle\Entity\Category;
+use AppBundle\Entity\FileUploaded;
 use AppBundle\Form\CategoryType;
+use AppBundle\Form\FileUploadedType;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Routing\Annotation\Route;
@@ -37,6 +39,7 @@ class FilesController extends Controller
     public function listBySectionAndCategory(Request $request, $section, $category_id = null)
     {
         $categoryTree = array(); // Récupérer l'arbre pour le breadcrumb null par defaut
+        $parent = null;
 
         if(!($section == Category::CRPE_SECTION || $section == Category::ECOLE_SECTION)){
             throw $this->createNotFoundException('Cette section n\'existe pas.');
@@ -78,6 +81,7 @@ class FilesController extends Controller
         return $this->render('admin/files/list_by_section_category.html.twig', array(
             'section' => $section,
             'category' => $category_id,
+            'parent' => $parent,
             'sectionCRPE' => Category::CRPE_SECTION,
             'sectionEcole' => Category::ECOLE_SECTION,
             'categoriesList' => $categoriesList,
@@ -197,6 +201,74 @@ class FilesController extends Controller
             'sectionEcole' => Category::ECOLE_SECTION,
             'form' => $form->createView(),
             'category' => $category
+        ));
+    }
+
+    /**
+     * @Route("/fichier/ajouter/{category_id}", name="admin_files_category_file_add", requirements={"category_id": "\d+"})
+     */
+    public function addFileUploaded(Request $request, $category_id = null)
+    {
+        $fileUploaded = new FileUploaded();
+
+        $category = $this->getDoctrine()->getManager()->getRepository('AppBundle:Category')->find($category_id);
+        if(!isset($category)){
+            throw $this->createNotFoundException('Cette catégorie n\'existe pas.');
+        }
+
+        $form = $this->createForm(FileUploadedType::class, $fileUploaded);
+        $form->handleRequest($request);
+
+        if($form->isSubmitted() && $form->isValid()){
+            $em = $this->getDoctrine()->getManager();
+            $fileUploaded->setCategory($category);
+            $em->persist($fileUploaded);
+            $em->flush();
+
+            $this->addFlash('success', 'Le nouveau fichier a bien été enregistrée !');
+
+            return $this->redirectToRoute('admin_files_list_by_section_category', array('section' => $category->getSection(), 'category_id' => $category->getId()));
+        }
+
+        return $this->render('admin/files/add_file.html.twig', array(
+            'category' => $category,
+            'form' => $form->createView()
+        ));
+    }
+
+    /**
+     * @Route("/fichier/supprimer/{file_id}/parent/{category_id}", name="admin_files_file_delete", requirements={"file_id": "\d+", "category_id": "\d+"})
+     */
+    public function deleteFileUploadedAction(Request $request, $file_id, $category_id)
+    {
+        $fileUploaded = $this->getDoctrine()->getManager()->getRepository('AppBundle:FileUploaded')->find($file_id);
+        if(!isset($fileUploaded)){
+            throw $this->createNotFoundException('Ce fichier n\'existe pas.');
+        }
+        $parentCategory = $this->getDoctrine()->getManager()->getRepository('AppBundle:Category')->find($category_id);
+        if(!isset($parentCategory)){
+            throw $this->createNotFoundException('Cette catégorie parente n\'existe pas.');
+        }
+
+        $form = $this->get('form.factory')->create();
+
+        $form->handleRequest($request);
+
+        if ($form->isSubmitted() && $form->isValid()) {
+            $em = $this->getDoctrine()->getManager();
+
+
+            $em->remove($fileUploaded);
+            $em->flush();
+
+            $this->addFlash('success', 'Le fichier "'.$fileUploaded->getDescription().'" a bien été supprimé.');
+            return $this->redirectToRoute('admin_files_list_by_section_category', array('section' => $parentCategory->getSection(), 'category_id' => $parentCategory->getId()));
+        }
+
+        return $this->render('admin/files/delete_file.html.twig', array(
+            'fileUploaded' => $fileUploaded,
+            'category' => $parentCategory,
+            'form' => $form->createView(),
         ));
     }
 

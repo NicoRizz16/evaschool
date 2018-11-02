@@ -61,6 +61,13 @@ class FileUploaded
     private $category;
 
     /**
+     * @var string
+     *
+     * @ORM\Column(name="description", type="text")
+     */
+    private $description;
+
+    /**
      * Get id
      *
      * @return int
@@ -203,5 +210,29 @@ class FileUploaded
     public function getUpdatedAt()
     {
         return $this->updatedAt;
+    }
+
+    /**
+     * Set description
+     *
+     * @param string $description
+     *
+     * @return FileUploaded
+     */
+    public function setDescription($description)
+    {
+        $this->description = $description;
+
+        return $this;
+    }
+
+    /**
+     * Get description
+     *
+     * @return string
+     */
+    public function getDescription()
+    {
+        return $this->description;
     }
 }
